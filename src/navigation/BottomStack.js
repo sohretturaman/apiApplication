@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Location } from '../screens';
+import { Home, Location, PrayerTimes } from '../screens';
 import { RouterNames, colors } from '../config';
 import {Image} from 'react-native'
 import { home,location } from '../assets/icons';
@@ -12,7 +12,7 @@ const  BottomStack =()=> {
     <Tab.Navigator
      screenOptions={{headerShown: false}}
     >
-      <Tab.Screen name={RouterNames.DRAWER_HOME} component={Home}
+      <Tab.Screen name={RouterNames.DRAWER_HOME} component={PrayerTimes}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image  source={home} style={styles.icon} tintColor={focused ? colors.primary : colors.lightGray} />
