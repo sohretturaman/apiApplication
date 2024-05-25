@@ -1,8 +1,12 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Input from '../../component/input';
 
 import {getPrayerTimes} from '../../service/prayerTimes';
+import Button from '../../component/button';
+import {colors} from '../../config';
+import {PrayerItem} from '../../component';
+import styles from './styles';
 
 const initialData = [
   {saat: '03:40', vakit: 'İmsak'},
@@ -26,7 +30,7 @@ const PrayerTimes = props => {
       setPrayerTimes(res.result);
     });
   };
-  
+
   const handleSubmit = () => {
     const textWithoutSpaces = value.replace(/\s+/g, '');
     console.log('textWithoutSpaces', textWithoutSpaces);
@@ -37,16 +41,38 @@ const PrayerTimes = props => {
 
   //api get request is working properly!!
   return (
-    <View>
+    <View style={styles.container}>
       <Input
         value={value}
         onChangeText={value => setValue(value)}
         onSubmitEditing={handleSubmit}
       />
       {locationInfo?.city && (
-        <Text>Your Current City is : {locationInfo?.city}</Text>
+        <View>
+          <Text style={styles.title}>
+           <Text style={styles.innerTitle}>Your Current City is and State: </Text>   {locationInfo?.city},{' '}
+            {locationInfo?.state}
+          </Text>
+          <Button
+            title="Get Prayer Times of your current city"
+            onPress={() => getPrayerTimesByCity(locationInfo?.city)}
+            bgColor={colors.primary}
+            textColor={colors.white}
+            tintColor={colors.white}
+          />
+        </View>
       )}
-      <Text>{prayerTimes && JSON.stringify(prayerTimes)}</Text>
+
+      <Text style={styles.title}>
+        {value ? value : 'İstanbul'} İçin Namaz Vakitleri
+      </Text>
+      <FlatList
+        style={styles.list}
+        data={prayerTimes}
+        renderItem={({item}) => (
+          <PrayerItem saat={item.saat} vakit={item.vakit} />
+        )}
+      />
     </View>
   );
 };

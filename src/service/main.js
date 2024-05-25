@@ -10,6 +10,7 @@ const get =(urlOption)=>{
 
     }).then((response)=>{
         if(!response.ok){
+            console.log('response was not ok', response.statusText)
             throw new Error('response was not ok',response.statusText)
         }
          console.log('response.json',response.status)

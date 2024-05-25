@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         fontSize:Width*0.05,
         fontWeight:'bold',
         alignSelf:'center',
-        marginVertical:Width*0.05
+        marginVertical:Width*0.05,
+        textAlign:  'center'
     },
     container:{
         justifyContent:'center',

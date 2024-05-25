@@ -41,7 +41,7 @@ const {handleAddress} = props;
       .then(data => {
         const currentInfo = {
             city: data.results[0].components.city,
-            town: data.results[0].components.state,
+            state: data.results[0].components.state,
         }
 
        
